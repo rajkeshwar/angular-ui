@@ -17,12 +17,10 @@ import { CustomercreateComponent } from './customercreate/customercreate.compone
 import { SetpasswordComponent } from './setpassword/setpassword.component';
 import { UsersettingComponent } from './usersetting/usersetting.component';
 import { AddpayeeComponent } from './addpayee/addpayee.component';
-import { FundComponent } from './fund/fund.component';
 import { AccountstatementComponent } from './accountstatement/accountstatement.component';
 import { SetnewpasswordComponent } from './setnewpassword/setnewpassword.component';
-import { RtgsComponent } from './rtgs/rtgs.component';
-import { ImpsComponent } from './imps/imps.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from './components';
 
 @NgModule({
   declarations: [
@@ -39,11 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SetpasswordComponent,
     UsersettingComponent,
     AddpayeeComponent,
-    FundComponent,
     AccountstatementComponent,
     SetnewpasswordComponent,
-    RtgsComponent,
-    ImpsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +46,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
     NgbModule
   ],
   providers: [],
