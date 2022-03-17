@@ -11,6 +11,17 @@ import { AccountComponent } from './account/account.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { CustomercreateComponent } from './customercreate/customercreate.component';
+import { SetpasswordComponent } from './setpassword/setpassword.component';
+import { UsersettingComponent } from './usersetting/usersetting.component';
+import { AddpayeeComponent } from './addpayee/addpayee.component';
+import { FundComponent } from './fund/fund.component';
+import { AccountstatementComponent } from './accountstatement/accountstatement.component';
+import { SetnewpasswordComponent } from './setnewpassword/setnewpassword.component';
+import { RtgsComponent } from './rtgs/rtgs.component';
+import { ImpsComponent } from './imps/imps.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,11 +32,23 @@ import { PaymentComponent } from './payment/payment.component';
     AccountComponent,
     ForgotComponent,
     DashboardComponent,
-    PaymentComponent
+    PaymentComponent,
+    ForgotPasswordComponent,
+    CustomercreateComponent,
+    SetpasswordComponent,
+    UsersettingComponent,
+    AddpayeeComponent,
+    FundComponent,
+    AccountstatementComponent,
+    SetnewpasswordComponent,
+    RtgsComponent,
+    ImpsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   providers: [],

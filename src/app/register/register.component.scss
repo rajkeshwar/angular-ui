@@ -1,24 +1,38 @@
 
-.register-form {
-  margin: 0 auto;
-  max-width: 640px;
-
-}
-
-.form-field {
-  display: flex;
-  & > * {
-    flex: 1;
-  }
-}
-
-.register-heading {
+.login-heading {
   display: flex;
   justify-content: center;
   margin: 2rem 0;
 }
+.login-form {
+  margin: 0 auto;
+  max-width: 500px;
+}
 
-.register-submit {
+.field-label {
+  width: 200px;
+}
+.form-field {
+  display: flex;
+}
+
+.login-submit {
   display: flex;
   justify-content: center;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
 }

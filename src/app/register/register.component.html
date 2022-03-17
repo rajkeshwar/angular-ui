@@ -1,32 +1,57 @@
-<div class="container">
-  <h2 class="register-heading">Register for Internet Banking</h2>
-  <form class="register-form">
-    <div class="form-field mb-4">
-      <label for="userid" class="field-label">Account Number</label>
-      <input type="text" class="form-control">
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form class="mx-1 mx-md-4" [formGroup]="registerForm" (submit)="handleSubmit($event)">
+          <h3 style="padding-top: 25px;" class="mb-5 text-uppercase">Register</h3>
+          <div class="form-outline mb-4">
+            <input type="email" id="accountNo" class="form-control form-control-lg"
+              placeholder="Account Number" formControlName="accountNo"/>
+            <label class="form-label" for="accountNo"></label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="password" class="form-control form-control-lg"
+              placeholder="Password" formControlName="password"/>
+            <label class="form-label" for="password"></label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="rePassword" class="form-control form-control-lg"
+              placeholder="Repeat your password" formControlName="rePassword" />
+            <label class="form-label" for="rePassword"></label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="txnPassword" class="form-control form-control-lg"
+              placeholder="Set Transaction Password" formControlName="txnPassword"/>
+            <label class="form-label" for="txnPassword"></label>
+          </div>
+
+           <!-- Password input -->
+           <div class="form-outline mb-3">
+            <input type="password" id="confTxnPassword" class="form-control form-control-lg"
+              placeholder="Confirm Transaction Password" formControlName="confTxnPassword"/>
+            <label class="form-label" for="confTxnPassword"></label>
+          </div>
+          <div class="form-outline mb-4">
+            <input type="email" id="otp" class="form-control form-control-lg"
+              placeholder="OTP" formControlName="otp"/>
+            <label class="form-label" for="otp"></label>
+          </div>
+
+          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <button type="submit" class="btn btn-primary btn-lg" [disabled]="isInvlid">Register</button>
+          </div>
+          <p class="text-center text-muted mt-5 mb-0">Have already an account? 
+          <a routerLink="/login" class="fw-bold text-body"><u>Login here</u></a></p>
+        </form>
+
+      </div>
     </div>
-    <div class="form-field mb-4">
-      <label for="password" class="field-label">Set Login Password</label>
-      <input type="password" class="form-control">
-    </div>
-    <div class="form-field mb-4">
-      <label for="password" class="field-label">Confirm Login Password</label>
-      <input type="password" class="form-control">
-    </div>
-    <div class="form-field mb-4">
-      <label for="password" class="field-label">Set Transaction Password</label>
-      <input type="password" class="form-control">
-    </div>
-    <div class="form-field mb-4">
-      <label for="password" class="field-label">Confirm Trancation Password</label>
-      <input type="password" class="form-control">
-    </div>
-    <div class="form-field mb-4">
-      <label for="password" class="field-label">Enter OTP</label>
-      <input type="password" class="form-control">
-    </div>
-    <div class="register-submit">
-      <button type="button" class="btn btn-primary">Submit</button>
-    </div>    
-  </form>
-</div>
+  </div>
+</section>

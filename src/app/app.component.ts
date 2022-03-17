@@ -16,6 +16,17 @@ export class AppComponent {
     { route: 'login', title: 'Login' },
     { route: 'register', title: 'Register' },
     { route: 'payment', title: 'Payment' },
+    { route: 'forgot-password', title: 'forgot-password' },
+    { route: 'customercreate', title: 'customercreate' },
+    { route: 'usersetting', title: 'usersetting' },
+    { route: 'addpayee', title: 'addpayee' },
+    { route: 'forgot', title: 'forgot' },
+    { route: 'fund', title: 'fund' },
+    { route: 'setpassword', title: 'setpassword' },
+    { route: 'accountstatement', title: 'accountstatement' },
+    { route: 'setnewpassword', title: 'setnewpassword' },
+    { route: 'rtgs', title: 'rtgs' },
+    { route: 'imps', title: 'imps' },
   ];
 
   constructor(public route: ActivatedRoute){}
