@@ -1,4 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { Observable, of } from "rxjs";
+import { User } from "./model/User";
 
 export const checkPasswords: ValidatorFn = (
   group: AbstractControl
@@ -14,4 +16,13 @@ export const hasSame = (input: string, reInput: string) => {
     const confirmPass = group.get(reInput)?.value;
     return pass === confirmPass ? null : { notSame: true };
   };
+};
+
+export const getLoggedInUser = (): Observable<User | null> => {
+  try {
+    const userString: any = localStorage.getItem("user");
+    return of(JSON.parse(userString));
+  } catch (ex) {
+    return of(null);
+  }
 };

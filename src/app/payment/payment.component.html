@@ -1,5 +1,22 @@
-<div class="btn-group btn-group-justified">
-    <a href="/fund" class="btn btn-primary">NEFT</a>
-    <a href="#" class="btn btn-primary">RTGS</a>
-    <a href="#" class="btn btn-primary">IMPS</a>
-</div>
+
+<ul ngbNav #nav="ngbNav" class="nav-pills">
+    <li ngbNavItem>
+        <a ngbNavLink>NEFT</a>
+        <ng-template ngbNavContent>
+            <neft-transfer></neft-transfer>
+        </ng-template>
+    </li>
+    <li ngbNavItem>
+        <a ngbNavLink>RTGS</a>
+        <ng-template ngbNavContent>
+            <rtgs-transfer></rtgs-transfer>
+        </ng-template>
+    </li>
+    <li ngbNavItem>
+        <a ngbNavLink>IMPS</a>
+        <ng-template ngbNavContent>
+            <imps-transfer></imps-transfer>
+        </ng-template>
+    </li>
+</ul>
+<div [ngbNavOutlet]="nav"></div>

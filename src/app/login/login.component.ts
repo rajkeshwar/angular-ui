@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       .get(`/api/users?accountNo=${username}&password=${password}`)
       .subscribe((resp: any) => {
         if (resp && resp.length > 0) {
+          localStorage.setItem('user', JSON.stringify(resp[0]));
           this.router.navigate(["/dashboard"]);
         } else {
           this.alert = {

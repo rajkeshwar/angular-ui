@@ -14,8 +14,13 @@
       </div>
     </div>
   </div>
+  <div class="navbar-nav">
+    <a class="nav-link active">{{(user | async)?.accountNo}}</a>
+    <a class="nav-link cursor">Logout</a>
+  </div>
 </nav>
 
 <div class="container">
+  <div class="border border-1" *ngIf="user | async">
   <router-outlet></router-outlet>
 </div>

@@ -7,13 +7,10 @@ import { CustomercreateComponent } from "./customercreate/customercreate.compone
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { ForgotComponent } from "./forgot/forgot.component";
-import { FundComponent } from "./fund/fund.component";
 import { HomeComponent } from "./home/home.component";
-import { ImpsComponent } from "./imps/imps.component";
 import { LoginComponent } from "./login/login.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { RegisterComponent } from "./register/register.component";
-import { RtgsComponent } from "./rtgs/rtgs.component";
 import { SetnewpasswordComponent } from "./setnewpassword/setnewpassword.component";
 import { SetpasswordComponent } from "./setpassword/setpassword.component";
 import { UsersettingComponent } from "./usersetting/usersetting.component";
@@ -39,10 +36,7 @@ const routes: Routes = [
   },
   { path: "customercreate", component: CustomercreateComponent },
   { path: "forgot-password", component: ForgotPasswordComponent },
-  { path: "setpassword", component: SetpasswordComponent },
-  { path: "fund", component: FundComponent },
-  { path: "rtgs", component: RtgsComponent },
-  { path: "imps", component: ImpsComponent },
+  { path: "setpassword", component: SetpasswordComponent }
 ];
 
 @NgModule({
