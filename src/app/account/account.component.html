@@ -10,7 +10,12 @@
             </tr>
         </thead>
         <tbody>
-
+            <tr *ngFor="let state of statements">
+                <td>{{state.accountNo}}</td>
+                <td>{{state.name}}</td>
+                <td>{{state.accountType}}</td>
+                <td>{{state.balance}}</td>
+            </tr>
         </tbody>
     </table>
 </div>

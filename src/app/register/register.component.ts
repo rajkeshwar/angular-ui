@@ -1,13 +1,6 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from "@angular/forms";
-import { hasSame } from "../utis";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-register",
@@ -16,8 +9,12 @@ import { hasSame } from "../utis";
 })
 export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
+  public alert = {
+    type: "success",
+    message: "",
+  };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.registerForm = this.fb.group({
       accountNo: [null, Validators.required],
       password: [null, Validators.required],
@@ -35,6 +32,19 @@ export class RegisterComponent implements OnInit {
 
     // Send the this.registerForm.value to the API
     console.log(this.registerForm.value);
+
+    this.httpClient
+      .post("/api/users", this.registerForm.value)
+      .subscribe((resp: any) => {
+        if (resp && resp.id) {
+          this.registerForm.reset();
+          this.alert = {
+            type: "success",
+            message: "Register success. Please login",
+          };
+          setTimeout(() => (this.alert.message = ""), 5000);
+        }
+      });
   }
 
   get isInvlid() {

@@ -4,6 +4,7 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
 
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 mb-4">
+          <ngb-alert [type]="alert.type" *ngIf="alert.message" class="mb-4">{{alert.message}}</ngb-alert>
           <form class="mx-1 mx-md-4 mb-4" [formGroup]="form" (submit)="handleSubmit($event)">
             <h4 style="padding-top: 25px;" class="mb-5 text-uppercase"> Open A Saving Account</h4>
 

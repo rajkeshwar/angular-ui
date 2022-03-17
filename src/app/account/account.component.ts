@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  public statements: any = [];
+
+  constructor(private httpClient:HttpClient) { }
 
   ngOnInit(): void {
+    this.httpClient.get('/api/customers?_start=0&_limit=10')
+      .subscribe(resp => this.statements = resp);
   }
 
 }
