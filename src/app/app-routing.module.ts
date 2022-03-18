@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AccountComponent } from "./account/account.component";
 import { AccountstatementComponent } from "./accountstatement/accountstatement.component";
 import { AddpayeeComponent } from "./addpayee/addpayee.component";
+import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
 import { CustomercreateComponent } from "./customercreate/customercreate.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
@@ -36,7 +37,8 @@ const routes: Routes = [
   },
   { path: "customercreate", component: CustomercreateComponent },
   { path: "forgot-password", component: ForgotPasswordComponent },
-  { path: "setpassword", component: SetpasswordComponent }
+  { path: "setpassword", component: SetpasswordComponent },
+  { path: "admindashboard", component: AdmindashboardComponent }
 ];
 
 @NgModule({

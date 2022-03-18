@@ -35,6 +35,7 @@ export class AppComponent {
     { route: "setnewpassword", title: "setnewpassword" },
     { route: "rtgs", title: "rtgs" },
     { route: "imps", title: "imps" },
+    { route: "admindashboard", title: "admindashboard" },
   ];
 
   constructor(public route: ActivatedRoute) {}

@@ -20,6 +20,7 @@ export class CustomercreateComponent implements OnInit {
       mobile: ["", Validators.required],
       email: ["", Validators.required],
       address: ["", Validators.required],
+      adharNumber: ["", Validators.required],
       city: ["", Validators.required],
       state: ["", Validators.required],
       pincode: ["", Validators.required],
@@ -39,13 +40,13 @@ export class CustomercreateComponent implements OnInit {
     console.log("Submit called", this.form.value);
 
     this.httpClient
-      .post("/api/createCustomers", this.form.value)
+      .post("/v2/user/create", this.form.value)
       .subscribe((resp: any) => {
-        if (resp && resp.id) {
+        if (resp && resp.userid) {
           this.form.reset();
           this.alert = {
             type: "success",
-            message: `Customer created successfully with id ${resp.id}`,
+            message: `Customer created successfully with referenceno : ${resp.referenceno}`,
           };
         }
       });
