@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
@@ -20,7 +20,11 @@ export class SetnewpasswordComponent implements OnInit {
   ) {
     this.setnewpassForm = this.fb.group({
       username: ["", Validators.required],
-      password: ["", Validators.required],
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required,
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') //this is for the letters (both uppercase and lowercase) and numbers validation
+     ])),
       repassword: ["", Validators.required],
     });
   }

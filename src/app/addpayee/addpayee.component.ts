@@ -36,8 +36,6 @@ export class AddpayeeComponent implements OnInit {
     this.addPayeeForm.patchValue({
       userId: userid, 
     });
-    console.log(userid);
-    console.log(this.addPayeeForm.value);
     this.httpClient
       .post("/v2/addPayee", this.addPayeeForm.value)
       .subscribe((resp: any) => {

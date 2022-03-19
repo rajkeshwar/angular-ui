@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-customercreate",
@@ -18,7 +18,10 @@ export class CustomercreateComponent implements OnInit {
       fathersName: ["", Validators.required],
       gender: ["", Validators.required],
       mobile: ["", Validators.required],
-      email: ["", Validators.required],
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
       address: ["", Validators.required],
       adharNumber: ["", Validators.required],
       city: ["", Validators.required],
