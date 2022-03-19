@@ -1,17 +1,17 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { getLoggedInUser } from "../utis";
 
 @Component({
   selector: "imps-transfer",
   template: `
-  <form (submit)="handleSubmit($event)">
+  <form [formGroup]="impsForm" (submit)="handleSubmit($event)">
       <table cellspacing="7" cellpadding="8 " align="center" bgcolor="white">
         <div align="center">
           <h3>Initiate IMPS Payment</h3>
           <br />
         </div>
-
         <tr>
           <td>From Account</td>
           <td><input type="text" name="fromaccountnumber" formControlName="fromaccountnumber"/></td>
@@ -53,7 +53,7 @@ export class ImpsComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.impsForm = this.fb.group({
       fromaccountnumber: [null, Validators.required],
-      accountnumber: [null, Validators.required],
+      accountNumber: [null, Validators.required],
       amount: [null, Validators.required],
       transactiondate: [null, Validators.required],
       remarks: [null, Validators.required],
@@ -63,19 +63,20 @@ export class ImpsComponent implements OnInit {
 
   ngOnInit() {}
 
-  handleSubmit(event: Event) {
+  async handleSubmit(event: Event) {
     event.preventDefault();
 
-    // Send the this.registerForm.value to the API
-    var data = localStorage.getItem("user");
-    var userid="";
-    if(data != null){
-      userid = JSON.parse(data).userid;
-    }
+     // Send the this.registerForm.value to the API
+     const user: any = await getLoggedInUser().toPromise();
+
+     console.log('user ', user.id)
+     console.log('impsForm ', this.impsForm.value)
+
     this.impsForm.patchValue({
-      userId: userid, 
-      fundMode:"Imps",
+      userId: user.id, 
+      fundMode: 'Imps',
     });
+
     this.httpClient
       .post("/v2/addFund", this.impsForm.value)
       .subscribe((resp: any) => {

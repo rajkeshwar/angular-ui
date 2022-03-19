@@ -1,11 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { getLoggedInUser } from "../utis";
+import { User } from "../model/User";
 
 @Component({
   selector: "neft-transfer",
   template: `
-    <form   (submit)="handleSubmit($event)">
+    <form  [formGroup]="neftForm" (submit)="handleSubmit($event)">
       <table cellspacing="7" cellpadding="8 " align="center" bgcolor="white">
         <div align="center">
           <h3>Initiate NEFT Payment</h3>
@@ -64,7 +66,7 @@ export class NeftComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.neftForm = this.fb.group({
       fromaccountnumber: [null, Validators.required],
-      accountnumber: [null, Validators.required],
+      accountNumber: [null, Validators.required],
       amount: [null, Validators.required],
       transactiondate: [null, Validators.required],
       remarks: [null, Validators.required],
@@ -74,19 +76,20 @@ export class NeftComponent implements OnInit {
 
   ngOnInit() {}
 
-  handleSubmit(event: Event) {
+  async handleSubmit(event: Event) {
     event.preventDefault();
 
     // Send the this.registerForm.value to the API
-    var data = localStorage.getItem("user");
-    var userid="";
-    if(data != null){
-      userid = JSON.parse(data).userid;
-    }
+    const user: any = await getLoggedInUser().toPromise();
+
+    console.log('user ', user.id)
+    console.log('neftForm ', this.neftForm.value)
+
     this.neftForm.patchValue({
-      userId: userid, 
+      userId: user.id, 
       fundMode:"Neft",
     });
+
     this.httpClient
       .post("/v2/addFund", this.neftForm.value)
       .subscribe((resp: any) => {

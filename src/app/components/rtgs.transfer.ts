@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { getLoggedInUser } from "../utis";
 
 @Component({
   selector: "rtgs-transfer",
   template: `
-    <form (submit)="handleSubmit($event)">
+    <form [formGroup]="rtgsForm" (submit)="handleSubmit($event)">
       <table cellspacing="7" cellpadding="8 " align="center" bgcolor="white">
         <div align="center">
           <h3>Initiate RTGS Payment</h3>
@@ -52,7 +53,7 @@ export class RtgsComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.rtgsForm = this.fb.group({
       fromaccountnumber: [null, Validators.required],
-      accountnumber: [null, Validators.required],
+      accountNumber: [null, Validators.required],
       amount: [null, Validators.required],
       transactiondate: [null, Validators.required],
       remarks: [null, Validators.required],
@@ -62,19 +63,20 @@ export class RtgsComponent implements OnInit {
 
   ngOnInit() {}
 
-  handleSubmit(event: Event) {
+  async handleSubmit(event: Event) {
     event.preventDefault();
 
     // Send the this.registerForm.value to the API
-    var data = localStorage.getItem("user");
-    var userid="";
-    if(data != null){
-      userid = JSON.parse(data).userid;
-    }
+    const user: any = await getLoggedInUser().toPromise();
+
+    console.log('user ', user.id)
+    console.log('rtgsForm ', this.rtgsForm.value)
+
     this.rtgsForm.patchValue({
-      userId: userid, 
+      userId: user.id, 
       fundMode:"Rtgs",
     });
+    
     this.httpClient
       .post("/v2/addFund", this.rtgsForm.value)
       .subscribe((resp: any) => {
