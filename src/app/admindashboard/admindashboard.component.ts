@@ -9,21 +9,19 @@ import { HttpClient } from "@angular/common/http";
 export class AdmindashboardComponent implements OnInit {
 
   studentDetails = null as any;
-  studentToUpdate = {
-    rollNumber:"",
-    name:"",
+  userToUpdate = {
     address:"",
-    percentage:""
+    customerId:""
   }
 
   edit(studuent: any){
-    this.studentToUpdate = studuent;
+    this.userToUpdate = studuent;
   }
 
   public statements: any = [];
 
   constructor(private httpClient:HttpClient) { }
-  API = 'http://localhost:9090';
+  API = 'http://localhost:7070';
   ngOnInit(): void {
     this.httpClient.get('/v2/user/admin/list')
       .subscribe(resp => this.statements = resp);

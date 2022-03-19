@@ -1,22 +1,30 @@
 <div class="w-full">
 
   <h2>Account Summary</h2>
+  <form id="login" [formGroup]="accForm" (submit)="handleSubmit($event)">
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-outline">
         <span>From</span>
-        <input placeholder="From" type="date" id="form3Example1m" class="form-control form-control-lg" />
-        <label class="form-label" for="form3Example1m"></label>
+        <input placeholder="From" type="date" id="fromdate" class="form-control form-control-lg" formControlName="fromdate"/>
+        <label class="form-label" for="fromdate"></label>
       </div>
     </div>
     <div class="col-md-6 mb-4">
       <div class="form-outline">
         <span>To</span>
-        <input placeholder="To" type="date" id="form3Example1n" class="form-control form-control-lg" />
-        <label class="form-label" for="form3Example1n"></label>
+        <input placeholder="To" type="date" id="todate" class="form-control form-control-lg" formControlName="todate"/>
+        <label class="form-label" for="todate"></label>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="accForm.invalid">Procced</button>
       </div>
     </div>
   </div>
+  </form>
   <div class="container hide">
     <table class="table table-bordered ">
       <thead>
@@ -28,7 +36,12 @@
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let state of statements">
+          <td>{{state.accountNumber}}</td>
+          <td>{{state.transactiondate}}</td>
+          <td>{{state.transactionmode}}</td>
+          <td>{{state.amount}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

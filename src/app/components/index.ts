@@ -11,4 +11,7 @@ const ComponentsList = [NeftComponent, RtgsComponent, ImpsComponent];
   declarations: ComponentsList,
   providers: [],
 })
-export class ComponentsModule {}
+export class ComponentsModule {
+  
+
+}

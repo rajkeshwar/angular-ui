@@ -1,26 +1,26 @@
 <div class="container">
     <div class="card mt-5" style="align-items: center;">
-      <h1>Student Dashboard</h1>
+      <h1>Admin Dashboard</h1>
     </div>
   
     <div class="mt-5">
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Roll number</th>
-            <th>Namer</th>
-            <th>Address</th>
-            <th>Percentage</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Account Number</th>
+            <th>Customer Id</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody class="tbody">
           <tr *ngFor="let student of statements">
-            <td>{{student.username}}</td>
             <td>{{student.name}}</td>
-            <td>{{student.address}}</td>
-            <td>{{student.username}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.accountNo}}</td>
+            <td>{{student.customerId}}</td>
             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
                 (click)="edit(student)">Edit</button></td>
             <td><button type="button" class="btn btn-danger" (click)="deleteStudent(student)">Delete</button></td>
@@ -35,32 +35,22 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Student</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form #updateForm="ngForm" (ngSubmit)="updateStudent()">
+          <form #updateForm="ngForm" >
             <div class="form-group">
-              <label for="rollNumber">Student Rollnumber :</label>
-              <input type="text" disabled #rollNumber [(ngModel)]="studentToUpdate.rollNumber" name="rollNumber" id="rollNumber"
-                class="form-control" placeholder="Student Roll number">
+              <label for="accountNo">Account Number :</label>
+              <input type="text" disabled #accountNo name="accountNo" id="accountNo"
+                class="form-control" placeholder="Account Number">
             </div>
             <div class="form-group">
-              <label for="name">Student Name :</label>
-              <input type="text" #name [(ngModel)]="studentToUpdate.name" name="name" id="name" class="form-control"
-                placeholder="Student Name">
-            </div>
-            <div class="form-group">
-              <label for="address">Student Address :</label>
-              <input type="text" #address [(ngModel)]="studentToUpdate.address" name="address" id="address"
-                class="form-control" placeholder="Student Address">
-            </div>
-            <div class="form-group">
-              <label for="percentage">Student Percentage :</label>
-              <input type="number" #percentage [(ngModel)]="studentToUpdate.percentage" name="percentage" id="percentage"
-                class="form-control" placeholder="Student Percentage">
+              <label for="customerId">Customer Id :</label>
+              <input type="text" #customerId  name="customerId" id="customerId" class="form-control"
+                placeholder="Customer Id">
             </div>
             <div class="form-group">
               <input type="submit" value="Update" class="btn btn-primary w-100">

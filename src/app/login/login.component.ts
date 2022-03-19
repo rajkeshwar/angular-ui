@@ -35,9 +35,8 @@ export class LoginComponent implements OnInit {
     this.httpClient
       .post("/v2/user/login", this.loginForm.value)
       .subscribe((resp: any) => {
-        console.log(resp);
         if (resp && resp != null) {
-          localStorage.setItem('user', JSON.stringify(resp[0]));
+          localStorage.setItem('user', JSON.stringify(resp)); 
           if(resp.roleName == 'Admin'){
             this.router.navigate(["/admindashboard"]);
           }else{

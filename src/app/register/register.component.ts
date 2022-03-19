@@ -34,9 +34,9 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
 
     this.httpClient
-      .post("/api/users", this.registerForm.value)
+      .post("/v2/user/register", this.registerForm.value)
       .subscribe((resp: any) => {
-        if (resp && resp.id) {
+        if (resp && resp != null) {
           this.registerForm.reset();
           this.alert = {
             type: "success",

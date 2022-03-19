@@ -32,12 +32,12 @@ const routes: Routes = [
       { path: "payment", component: PaymentComponent },
       { path: "accountstatement", component: AccountstatementComponent },
       { path: "usersetting", component: UsersettingComponent },
-      { path: "setnewpassword", component: SetnewpasswordComponent },
+      { path: "setpassword", component: SetpasswordComponent },
     ],
   },
   { path: "customercreate", component: CustomercreateComponent },
   { path: "forgot-password", component: ForgotPasswordComponent },
-  { path: "setpassword", component: SetpasswordComponent },
+  { path: "setnewpassword", component: SetnewpasswordComponent },
   { path: "admindashboard", component: AdmindashboardComponent }
 ];
 

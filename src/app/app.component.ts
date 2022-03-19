@@ -15,6 +15,9 @@ export class AppComponent {
     id: 0,
     accountNo: "",
     password: "",
+    userName: "",
+    name:"",
+    balance:0,
   });
 
   public routeLinks = [
@@ -35,7 +38,7 @@ export class AppComponent {
     { route: "setnewpassword", title: "setnewpassword" },
     { route: "rtgs", title: "rtgs" },
     { route: "imps", title: "imps" },
-    { route: "admindashboard", title: "admindashboard" },
+    { route: "admindashboard", title: "imps" },
   ];
 
   constructor(public route: ActivatedRoute) {}
