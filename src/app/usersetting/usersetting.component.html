@@ -1,37 +1,31 @@
-<section class="vh-100">
-    <div class="container-fluid h-custom">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        
-        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <ngb-alert [type]="alert.type" *ngIf="alert.message" class="mt-4">{{alert.message}}</ngb-alert>
-          <form class="mx-1 mx-md-4" [formGroup]="setnewpassForm" (submit)="handleSubmit($event)">
-            <h3 style="padding-top: 25px;" class="mb-5 text-uppercase">Set New Password</h3>
-            <div class="form-outline mb-4">
-              <input type="email" id="username" class="form-control form-control-lg"
-                placeholder="User Name" formControlName="username"/>
-              <label class="form-label" for="username"></label>
-            </div>
-  
-            <!-- Password input -->
-            <div class="form-outline mb-3">
-              <input type="password" id="otp" class="form-control form-control-lg"
-                placeholder="Password" formControlName="password"/>
-              <label class="form-label" for="password"></label>
-            </div>
-            <div class="form-outline mb-3">
-                <input type="password" id="repassword" class="form-control form-control-lg"
-                  placeholder="Confirm Login Password" formControlName="repassword"/>
-                <label class="form-label" for="repassword"></label>
-              </div>
-            <div class="row">
-              <div class="col-md-6 mb-4">
-                <div class="form-outline">
-                  <button type="submit" class="btn btn-primary btn-lg" [disabled]="isInvlid">Procced</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+<table cellspacing="7" cellpadding="8 " align="center" bgcolor="white" *ngFor="let item of statements">
+  <div align="center">
+    <h3>User Details</h3>
+    <br />
+  </div>
+
+  <tr>
+    <td>Name :</td>
+    <td>{{ item.name }}</td>
+  </tr>
+  <tr>
+    <td>Father's Name:</td>
+    <td>{{ item.fathersName }}</td>
+  </tr>
+  <tr>
+    <td>Mobile :</td>
+    <td>{{ item.mobile }}</td>
+  </tr>
+  <tr>
+    <td>Email Id :</td>
+    <td>{{ item.email }}</td>
+  </tr>
+  <tr>
+    <td>Adhar Number :</td>
+    <td>{{ item.adharNumber }}</td>
+  </tr>
+  <tr>
+    <td>Address :</td>
+    <td>{{ item.address }}</td>
+  </tr>
+</table>

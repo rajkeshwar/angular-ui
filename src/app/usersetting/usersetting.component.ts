@@ -1,61 +1,25 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-usersetting',
   templateUrl: './usersetting.component.html',
   styleUrls: ['./usersetting.component.scss']
 })
+
 export class UsersettingComponent implements OnInit {
+  public statements: any = [];
 
-  public setnewpassForm: FormGroup;
-  public alert = { type: "success", message: "" };
+  constructor(private httpClient:HttpClient) { }
 
-  constructor(
-    private fb: FormBuilder,
-    private httpClient: HttpClient,
-    private router: Router
-  ) {
-    this.setnewpassForm = this.fb.group({
-      username: ["", Validators.required],
-      password: ["", Validators.required],
-      repassword: ["", Validators.required],
-    });
+  ngOnInit(): void {
+    var data = localStorage.getItem("user");
+    var userid="";
+    if(data != null){
+      userid = JSON.parse(data).userid;
+    }
+    this.httpClient.get('/v2/user/getList?id='+userid)
+      .subscribe(resp => this.statements = resp);
   }
-
-  ngOnInit(): void {}
-
-  handleSubmit(event: Event) {
-    event.preventDefault();
-
-    // Send the value this.forgotUserForm.value to the API
-    console.log(this.setnewpassForm.value);
-
-    const { username, password, repassword } = this.setnewpassForm.value;
-    this.httpClient
-      .post("/v2/user/setNewPassword", this.setnewpassForm.value)
-      .subscribe((resp: any) => {
-        console.log(resp);
-        if (resp && resp != null) {
-              setTimeout(() => (this.alert.message = ""), 5000);
-        } else {
-          this.alert = {
-            type: "danger",
-            message: "Invalid Username ",
-          };
-        }
-      });
-  }
-
-  get isInvlid() {
-    const { password, repassword } =
-      this.setnewpassForm.value;
-    return (
-      this.setnewpassForm.invalid ||
-      password !== repassword
-    );
-  }
-
 }
