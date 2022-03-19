@@ -70,15 +70,12 @@ export class RtgsComponent implements OnInit {
     const user: any = await getLoggedInUser().toPromise();
 
     console.log('user ', user.id)
-    console.log('rtgsForm ', this.rtgsForm.value)
-
-    this.rtgsForm.patchValue({
-      userId: user.id, 
-      fundMode:"Rtgs",
-    });
     
+    const body = { ...this.rtgsForm.value, userId: user.id, fundMode: 'Rtgs' };
+    console.log('rtgsForm body ', body)
+
     this.httpClient
-      .post("/v2/addFund", this.rtgsForm.value)
+      .post("/v2/addFund", body)
       .subscribe((resp: any) => {
         if (resp && resp != null) {
           this.rtgsForm.reset();

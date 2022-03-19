@@ -8,8 +8,10 @@ const customers = Array(100)
   .map((_) => {
     return {
       id: faker.datatype.uuid(),
-      accountNo: faker.phone.phoneNumber('38########'),
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      email: faker.internet.email(),
+      customerId: faker.phone.phoneNumber('128########'),
+      accountNo: faker.phone.phoneNumber('38########'),
       accountType: faker.random.arrayElement([ 'Savings', 'Current', 'Trade']),
       balance: faker.datatype.number({ min: 200, max: 98000 }),
       createdOn: faker.date.between('2015-01-01', '2022-03-05'),

@@ -6,7 +6,7 @@ import { getLoggedInUser } from "../utis";
 @Component({
   selector: "imps-transfer",
   template: `
-  <form [formGroup]="impsForm" (submit)="handleSubmit($event)">
+    <form [formGroup]="impsForm" (submit)="handleSubmit($event)">
       <table cellspacing="7" cellpadding="8 " align="center" bgcolor="white">
         <div align="center">
           <h3>Initiate IMPS Payment</h3>
@@ -43,7 +43,6 @@ import { getLoggedInUser } from "../utis";
   `,
 })
 export class ImpsComponent implements OnInit {
-
   public impsForm: FormGroup;
   public alert = {
     type: "success",
@@ -60,34 +59,28 @@ export class ImpsComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {}
 
   async handleSubmit(event: Event) {
     event.preventDefault();
 
-     // Send the this.registerForm.value to the API
-     const user: any = await getLoggedInUser().toPromise();
+    // Send the this.registerForm.value to the API
+    const user: any = await getLoggedInUser().toPromise();
 
-     console.log('user ', user.id)
-     console.log('impsForm ', this.impsForm.value)
+    console.log("user ", user.id);
 
-    this.impsForm.patchValue({
-      userId: user.id, 
-      fundMode: 'Imps',
+    const body = { ...this.impsForm.value, userId: user.id, fundMode: "Imps" };
+    console.log("impsForm body ", body);
+
+    this.httpClient.post("/v2/addFund", body).subscribe((resp: any) => {
+      if (resp && resp != null) {
+        this.impsForm.reset();
+        this.alert = {
+          type: "success",
+          message: "Fund added successefully",
+        };
+        setTimeout(() => (this.alert.message = ""), 5000);
+      }
     });
-
-    this.httpClient
-      .post("/v2/addFund", this.impsForm.value)
-      .subscribe((resp: any) => {
-        if (resp && resp != null) {
-          this.impsForm.reset();
-          this.alert = {
-            type: "success",
-            message: "Fund added successefully",
-          };
-          setTimeout(() => (this.alert.message = ""), 5000);
-        }
-      });
   }
 }

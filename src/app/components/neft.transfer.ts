@@ -7,7 +7,7 @@ import { User } from "../model/User";
 @Component({
   selector: "neft-transfer",
   template: `
-    <form  [formGroup]="neftForm" (submit)="handleSubmit($event)">
+    <form [formGroup]="neftForm" (submit)="handleSubmit($event)">
       <table cellspacing="7" cellpadding="8 " align="center" bgcolor="white">
         <div align="center">
           <h3>Initiate NEFT Payment</h3>
@@ -73,7 +73,6 @@ export class NeftComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {}
 
   async handleSubmit(event: Event) {
@@ -82,25 +81,20 @@ export class NeftComponent implements OnInit {
     // Send the this.registerForm.value to the API
     const user: any = await getLoggedInUser().toPromise();
 
-    console.log('user ', user.id)
-    console.log('neftForm ', this.neftForm.value)
+    console.log("user ", user.id);
 
-    this.neftForm.patchValue({
-      userId: user.id, 
-      fundMode:"Neft",
+    const body = { ...this.neftForm.value, userId: user.id, fundMode: "Neft" };
+    console.log("neftForm body ", body);
+
+    this.httpClient.post("/v2/addFund", body).subscribe((resp: any) => {
+      if (resp && resp != null) {
+        this.neftForm.reset();
+        this.alert = {
+          type: "success",
+          message: "Fund added successefully",
+        };
+        setTimeout(() => (this.alert.message = ""), 5000);
+      }
     });
-
-    this.httpClient
-      .post("/v2/addFund", this.neftForm.value)
-      .subscribe((resp: any) => {
-        if (resp && resp != null) {
-          this.neftForm.reset();
-          this.alert = {
-            type: "success",
-            message: "Fund added successefully",
-          };
-          setTimeout(() => (this.alert.message = ""), 5000);
-        }
-      });
   }
 }
