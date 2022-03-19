@@ -4,17 +4,17 @@
         <thead>
             <tr>
                 <th>Account Number</th>
-                <th>Name</th>
-                <th>Account Type</th>
+                <th>Transaction Date</th>
+                <th>Transaction Mode</th>
                 <th>Balance</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let state of statements">
-                <td>{{state.accountNo}}</td>
-                <td>{{state.name}}</td>
-                <td>{{state.accountType}}</td>
-                <td>{{state.balance}}</td>
+                <td>{{state.accountNumber}}</td>
+                <td>{{state.transactiondate}}</td>
+                <td>{{state.transactionmode}}</td>
+                <td>{{state.amount}}</td>
             </tr>
         </tbody>
     </table>

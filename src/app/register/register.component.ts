@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators,FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-register",
@@ -17,7 +17,11 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.registerForm = this.fb.group({
       accountNo: [null, Validators.required],
-      password: [null, Validators.required],
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required,
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') //this is for the letters (both uppercase and lowercase) and numbers validation
+     ])),
       rePassword: [null, Validators.required],
       txnPassword: [null, Validators.required],
       confTxnPassword: [null, Validators.required],
@@ -34,9 +38,9 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
 
     this.httpClient
-      .post("/api/users", this.registerForm.value)
+      .post("/v2/user/register", this.registerForm.value)
       .subscribe((resp: any) => {
-        if (resp && resp.id) {
+        if (resp && resp != null) {
           this.registerForm.reset();
           this.alert = {
             type: "success",

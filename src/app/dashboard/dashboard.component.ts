@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
       text: "Account Details",
     },
     {
-      route: "setnewpassword",
+      route: "setpassword",
       icon: "fa fa-cog",
       text: "Setting",
     },

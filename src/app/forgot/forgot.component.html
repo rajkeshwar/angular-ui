@@ -3,32 +3,34 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
       
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form class="mx-1 mx-md-4">
-          <h4 style="padding-top: 25px;" class="mb-5 text-uppercase ">Forgot UserName</h4>
+        <ngb-alert [type]="alert.type" *ngIf="alert.message" class="mt-4">{{alert.message}}</ngb-alert>
+        <form class="mx-1 mx-md-4" [formGroup]="forgotUserForm" (submit)="handleSubmit($event)">
+          <h3 style="padding-top: 25px;" class="mb-5 text-uppercase">Forgot UserName</h3>
           <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Account Number" />
-            <label class="form-label" for="form3Example3"></label>
+            <input type="email" id="accountNo" class="form-control form-control-lg"
+              placeholder="Account Number" formControlName="accountNo"/>
+            <label class="form-label" for="accountNo"></label>
           </div>
-          <div class="form-outline mb-4">
-            <input type="otp" id="form3Example3" class="form-control form-control-lg"
-              placeholder="OTP" />
-            <label class="form-label" for="form3Example3"></label>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="otp" class="form-control form-control-lg"
+              placeholder="OTP" formControlName="otp"/>
+            <label class="form-label" for="otp"></label>
           </div>
           <div class="row">
             <div class="col-md-6 mb-4">
               <div class="form-outline">
-                <a routerLink="/login" class="btn btn-primary back">Back</a>
+                <a routerLink="/login" class="btn btn-primary btn-lg">Back</a>
               </div>
             </div>
             <div class="col-md-6 mb-4">
               <div class="form-outline">
-                <button type="button" class="btn btn-primary">Proceed</button>
+                <button type="submit" class="btn btn-primary btn-lg">Procced</button>
               </div>
             </div>
-        </div>
+          </div>
         </form>
-
       </div>
     </div>
   </div>

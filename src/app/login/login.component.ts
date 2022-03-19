@@ -33,11 +33,15 @@ export class LoginComponent implements OnInit {
 
     const { username, password } = this.loginForm.value;
     this.httpClient
-      .get(`/api/users?accountNo=${username}&password=${password}`)
+      .post("/v2/user/login", this.loginForm.value)
       .subscribe((resp: any) => {
-        if (resp && resp.length > 0) {
-          localStorage.setItem('user', JSON.stringify(resp[0]));
-          this.router.navigate(["/dashboard"]);
+        if (resp && resp != null) {
+          localStorage.setItem('user', JSON.stringify(resp)); 
+          if(resp.roleName == 'Admin'){
+            this.router.navigate(["/admindashboard"]);
+          }else{
+            this.router.navigate(["/dashboard"]);
+          }
         } else {
           this.alert = {
             type: "danger",
