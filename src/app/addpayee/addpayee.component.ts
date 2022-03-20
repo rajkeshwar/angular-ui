@@ -30,10 +30,11 @@ export class AddpayeeComponent implements OnInit {
     event.preventDefault();
     const user: any = await getLoggedInUser().toPromise();
 
-    console.log("userId ", user.id);
+    console.log("userId ", user.userid);
     console.log("addPayeeForm ", this.addPayeeForm.value);
 
-    const body = { ...this.addPayeeForm.value, userId: user.id };
+    const body = { ...this.addPayeeForm.value, userId: user.userid };
+    
 
     this.httpClient.post("/v2/addPayee", body).subscribe((resp: any) => {
       if (resp && resp != null) {

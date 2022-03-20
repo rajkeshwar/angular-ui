@@ -74,10 +74,11 @@ export class RtgsComponent implements OnInit {
     // Send the this.registerForm.value to the API
     const user: any = getLoggedInUser();
 
-    console.log("user ", user.id);
 
-    const body = { ...this.rtgsForm.value, userId: user.id, fundMode: "Rtgs" };
-    console.log("rtgsForm body ", body);
+    console.log('user ', user.userid)
+    
+    const body = { ...this.rtgsForm.value, userId: user.userid, fundMode: 'Rtgs', fromaccountnumber:user.accountNo };
+    console.log('rtgsForm body ', body)
 
     this.httpClient.post("/v2/addFund", body).subscribe((resp: any) => {
       if (resp && resp != null) {
@@ -89,5 +90,10 @@ export class RtgsComponent implements OnInit {
         setTimeout(() => (this.alert.message = ""), 5000);
       }
     });
+  }
+
+  get isInvlid() {
+    const { accountNumber } = this.rtgsForm.value;
+    return this.rtgsForm.invalid || accountNumber !== null;
   }
 }

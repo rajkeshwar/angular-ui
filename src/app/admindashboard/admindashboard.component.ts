@@ -10,48 +10,48 @@ import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class AdmindashboardComponent implements OnInit {
   public studentDetails = null as any;
   public updateUser = {
-    accountNo: "",
-    customerId: "",
+    username: "",
+    approved: "",
   };
 
   public customers: any = [];
 
   constructor(private httpClient: HttpClient, private modalService: NgbModal) {}
-  // Don't hardcode the base URL here. Configure in proxy.conf.json file.
-  // In this way it would be configurable.
-  API = "http://localhost:7070";
-
   ngOnInit(): void {
     this.httpClient
-      // .get("/v2/user/admin/list")
-      .get(`/api/customers?_start=0&_limit=10`)
+      .get("/v2/user/admin/list")
       .subscribe((resp) => (this.customers = resp));
-  }
-
-  updateStudent() {}
-
-  public deleteStudent(id: any) {
-    return this.httpClient.delete(this.API + "/deleteStudent?id=" + id);
-  }
-
-  public updateStudents(student: any) {
-    return this.httpClient.put(this.API + "/updateStudents", student);
   }
 
   save(updateUser: any) {
     // Call API and udpateUser
     console.log("Save updateUser : ", updateUser);
+    this.httpClient
+      .post("/v2/user/update",updateUser)
+      .subscribe((resp:any) => {
+        if (resp && resp != null) {
+          this.customers =resp;
+        } 
+      });
   }
 
   delete(deleteUser: any) {
     // CAll an API to delete User
-    console.log("Delete ", deleteUser);
+    this.httpClient
+      .delete("/v2/user/delete?id="+deleteUser.userid)
+      .subscribe((resp:any) => {console.log("Delete ", resp);
+          this.getStudentsDetails();
+      });
+  }
+
+  getStudentsDetails() {
+    this.httpClient
+    .get("/v2/user/admin/list")
+    .subscribe((resp) => (this.customers = resp));
   }
 
   async open(content: any, student: any) {
     await this.modalService.open(content);
-
-    // Populate this values in the edit form
     console.log("Edit ", student);
     this.updateUser = student;
   }

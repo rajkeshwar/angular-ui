@@ -34,13 +34,9 @@ export class AccountstatementComponent implements OnInit {
     console.log(data);
     var userId="";
     if(data != null){
-      console.log("1");
       userId = JSON.parse(data).userid;
-      console.log(userId);
     }
-    this.accForm.patchValue({
-      userId: userId, 
-    });
+    const body = { ...this.accForm.value, userId: userId};
 
     this.httpClient
       .post("/v2/accounthistory", this.accForm.value)

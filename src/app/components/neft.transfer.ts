@@ -39,7 +39,7 @@ import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
 
       <table align="center">
         <tr>
-        <button type="submit" class="btn btn-primary btn-lg">Continue</button>
+        <button type="submit" class="btn btn-primary btn-lg" >Continue</button>
         </tr>
       </table>
     </form>
@@ -79,10 +79,7 @@ export class NeftComponent {
     // Send the this.registerForm.value to the API
     const user: any = getLoggedInUser();
 
-    console.log("user ", user.id);
-
-    const body = { ...this.neftForm.value, userId: user.id, fundMode: "Neft" };
-    console.log("neftForm body ", body);
+    const body = { ...this.neftForm.value, userId: user.userid, fundMode: "Neft", fromaccountnumber:user.accountNo };
 
     this.httpClient.post("/v2/addFund", body).subscribe((resp: any) => {
       if (resp && resp != null) {
@@ -94,5 +91,10 @@ export class NeftComponent {
         setTimeout(() => (this.alert.message = ""), 5000);
       }
     });
+  }
+
+  get isInvlid() {
+    const { accountNumber } = this.neftForm.value;
+    return this.neftForm.invalid || accountNumber !== null;
   }
 }
