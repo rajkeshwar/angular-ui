@@ -66,10 +66,7 @@ export class ImpsComponent {
     // Send the this.registerForm.value to the API
     const user: any = await getLoggedInUser().toPromise();
 
-    console.log("user ", user.id);
-
-    const body = { ...this.impsForm.value, userId: user.id, fundMode: "Imps" };
-    console.log("impsForm body ", body);
+    const body = { ...this.impsForm.value, userId: user.userid, fundMode: "Imps", fromaccountnumber:user.accountNo };
 
     this.httpClient.post("/v2/addFund", body).subscribe((resp: any) => {
       if (resp && resp != null) {
@@ -81,5 +78,9 @@ export class ImpsComponent {
         setTimeout(() => (this.alert.message = ""), 5000);
       }
     });
+  }
+  get isInvlid() {
+    const { accountNumber } = this.impsForm.value;
+    return this.impsForm.invalid || accountNumber !== null;
   }
 }

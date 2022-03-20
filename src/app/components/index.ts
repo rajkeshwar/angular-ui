@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { PipesModule } from "../common/pipes";
 
+
 const ComponentsList = [NeftComponent, RtgsComponent, ImpsComponent];
 
 @NgModule({

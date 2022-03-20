@@ -48,5 +48,13 @@ export class ForgotComponent implements OnInit {
         } 
       });
   }
+public accountNo= "";
+  sendOtp(accountNo : any) {
+    this.httpClient
+      .get('/v2/user/otp?userId='+accountNo)
+      .subscribe((resp:any) => {
+      });
+  }
+
 
 }

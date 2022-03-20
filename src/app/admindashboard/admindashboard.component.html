@@ -9,8 +9,9 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
-          <th>Account Number</th>
-          <th>Customer Id</th>
+          <th>Adhar Number</th>
+          <th>DOB</th>
+          <th>Approved</th>
           <th style="width: 8rem">
             <div class="d-flex justify-content-center">Edit | Delete</div>
           </th>
@@ -20,8 +21,9 @@
         <tr *ngFor="let student of customers">
           <td>{{student.name}}</td>
           <td>{{student.email}}</td>
-          <td>{{student.accountNo}}</td>
-          <td>{{student.customerId}}</td>
+          <td>{{student.adharNumber}}</td>
+          <td>{{student.dob}}</td>
+          <td>{{student.approved}}</td>
           <td>
             <div class="d-flex justify-content-center">
               <i class="fa fa-edit" aria-hidden="true" (click)="open(content, student)"></i>
@@ -41,16 +43,26 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <form class="mb-2">
+    <form class="mb-2" >
       <div class="form-group mb-2">
-        <label for="accountNo">Account Number :</label>
-        <input type="text" disabled name="accountNo" id="accountNo" [(ngModel)]="updateUser.accountNo" class="form-control"
-          placeholder="Account Number">
+        <label for="accountNo">User Name :</label>
+        <input type="text" disabled name="username" id="username" [(ngModel)]="updateUser.username" class="form-control"
+          placeholder="User Name">
       </div>
-      <div class="form-group">
-        <label for="customerId">Customer Id :</label>
-        <input type="text" name="customerId" id="customerId" [(ngModel)]="updateUser.customerId" class="form-control"
-          placeholder="Customer Id">
+      <div class="d-md-flex justify-content-start align-items-center py-2">
+
+        <h6 class="mb-0 me-4">Approved?</h6>
+
+        <div class="form-check form-check-inline mb-0 me-4">
+          <input class="form-check-input" type="radio" id="no" value="false" [(ngModel)]="updateUser.approved" [ngModelOptions]="{standalone: true}"/>
+          <label class="form-check-label" for="no">No</label>
+        </div>
+
+        <div class="form-check form-check-inline mb-0 me-4">
+          <input class="form-check-input" type="radio" id="yes" value="true" [(ngModel)]="updateUser.approved" [ngModelOptions]="{standalone: true}"/>
+          <label class="form-check-label" for="yes">Yes</label>
+        </div>
+
       </div>
     </form>
   </div>
