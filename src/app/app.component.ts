@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { IUser, User } from "./model/User";
 import { UserService } from "./services/user.service";
+import { getLoggedInUser } from "./utis";
 
 @Component({
   selector: "app-root",
@@ -11,7 +12,7 @@ import { UserService } from "./services/user.service";
 })
 export class AppComponent {
 
-  public user?: IUser;
+  public user?: IUser = getLoggedInUser();
   
   public routeLinks = [
     { route: "home", title: "Home" },

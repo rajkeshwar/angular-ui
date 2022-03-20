@@ -15,6 +15,11 @@ export class UserService {
     this.storageSub.next(getLoggedInUser());
   }
 
+  isAuthenticated() {
+    const user = localStorage.getItem('user');
+    return user && JSON.parse(user).userName;
+  }
+
   removeUser() {
     localStorage.removeItem('user');
     this.storageSub.next(getLoggedInUser());

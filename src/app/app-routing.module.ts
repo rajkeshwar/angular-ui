@@ -4,6 +4,7 @@ import { AccountComponent } from "./account/account.component";
 import { AccountstatementComponent } from "./accountstatement/accountstatement.component";
 import { AddpayeeComponent } from "./addpayee/addpayee.component";
 import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
+import { AuthGuard } from "./auth.guard";
 import { CustomercreateComponent } from "./customercreate/customercreate.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
@@ -21,10 +22,11 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "forgot", component: ForgotComponent },
-  { path: "home", component: HomeComponent },
+  { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: "dashboard",
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "", redirectTo: "account", pathMatch: "full" },
       { path: "account", component: AccountComponent },
@@ -35,10 +37,26 @@ const routes: Routes = [
       { path: "setpassword", component: SetpasswordComponent },
     ],
   },
-  { path: "customercreate", component: CustomercreateComponent },
-  { path: "forgot-password", component: ForgotPasswordComponent },
-  { path: "setnewpassword", component: SetnewpasswordComponent },
-  { path: "admindashboard", component: AdmindashboardComponent }
+  {
+    path: "customercreate",
+    component: CustomercreateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "forgot-password",
+    component: ForgotPasswordComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "setnewpassword",
+    component: SetnewpasswordComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "admindashboard",
+    component: AdmindashboardComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
