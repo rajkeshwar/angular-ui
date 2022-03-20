@@ -1,3 +1,4 @@
+import { KeyValue } from "@angular/common";
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { User } from "./model/User";
@@ -26,3 +27,12 @@ export const getLoggedInUser = (): Observable<User | null> => {
     return of(null);
   }
 };
+
+export const originalOrder = (
+  a: KeyValue<number, string>,
+  b: KeyValue<number, string>
+): number => {
+  return 0;
+};
+
+export const trackByFn = (index: number) => index;

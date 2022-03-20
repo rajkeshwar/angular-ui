@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { getLoggedInUser } from "../utis";
+import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
 
 @Component({
   selector: "imps-transfer",
@@ -12,25 +12,15 @@ import { getLoggedInUser } from "../utis";
           <h3>Initiate IMPS Payment</h3>
           <br />
         </div>
-        <tr>
-          <td>From Account</td>
-          <td><input type="text" name="fromaccountnumber" formControlName="fromaccountnumber"/></td>
-        </tr>
-        <tr>
-          <td>To Account</td>
-          <td><input type="text" name="accountNumber" formControlName="accountNumber"/></td>
-        </tr>
-        <tr>
-          <td>Amount</td>
-          <td><input type="text" name="amount" formControlName="amount"/></td>
-        </tr>
-        <tr>
-          <td>Transaction Date</td>
-          <td><input type="date" name="transactiondate" formControlName="transactiondate"/></td>
-        </tr>
-        <tr>
-          <td>Remark</td>
-          <td><input type="text" name="remarks" formControlName="remarks" /></td>
+        <tr *ngFor="let field of impsForm.value | keyvalue: preserveOrder; trackBy: trackByFn">
+          <td>{{ field.key | heading }}</td>
+          <td>
+            <input
+              [type]="getInputType(field)"
+              [name]="field.key"
+              [formControlName]="getFormKey(field)"
+            />
+          </td>
         </tr>
       </table>
 
@@ -42,8 +32,11 @@ import { getLoggedInUser } from "../utis";
     </form>
   `,
 })
-export class ImpsComponent implements OnInit {
+export class ImpsComponent {
   public impsForm: FormGroup;
+  public preserveOrder = originalOrder;
+  public trackByFn = trackByFn;
+
   public alert = {
     type: "success",
     message: "",
@@ -51,15 +44,21 @@ export class ImpsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.impsForm = this.fb.group({
-      fromaccountnumber: [null, Validators.required],
-      accountNumber: [null, Validators.required],
+      fromAccount: [null, Validators.required],
+      toAccount: [null, Validators.required],
       amount: [null, Validators.required],
-      transactiondate: [null, Validators.required],
+      transactionDate: [null, Validators.required],
       remarks: [null, Validators.required],
     });
   }
 
-  ngOnInit() {}
+  getFormKey(field: any) {
+    return field.key;
+  }
+
+  getInputType(field: any) {
+    return /Date/i.test(field.key) ? "date" : "text";
+  }
 
   async handleSubmit(event: Event) {
     event.preventDefault();

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { getLoggedInUser } from "../utis";
+import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
 
 @Component({
   selector: "rtgs-transfer",
@@ -10,34 +10,29 @@ import { getLoggedInUser } from "../utis";
       <table cellspacing="7" cellpadding="8 " align="center" bgcolor="white">
         <div align="center">
           <h3>Initiate RTGS Payment</h3>
-          <br />
         </div>
 
-        <tr>
-          <td>From Account</td>
-          <td><input type="text" name="fromaccountnumber" formControlName="fromaccountnumber"/></td>
-        </tr>
-        <tr>
-          <td>To Account</td>
-          <td><input type="text" name="accountNumber" formControlName="accountNumber"/></td>
-        </tr>
-        <tr>
-          <td>Amount</td>
-          <td><input type="text" name="amount" formControlName="amount"/></td>
-        </tr>
-        <tr>
-          <td>Transaction Date</td>
-          <td><input type="date" name="transactiondate" formControlName="transactiondate"/></td>
-        </tr>
-        <tr>
-          <td>Remark</td>
-          <td><input type="text" name="remarks" formControlName="remarks"/></td>
+        <tr *ngFor="let field of rtgsForm.value | keyvalue: preserveOrder; trackBy: trackByFn">
+          <td>{{ field.key | heading }}</td>
+          <td>
+            <input
+              [type]="getInputType(field)"
+              [name]="field.key"
+              [formControlName]="getFormKey(field)"
+            />
+          </td>
         </tr>
       </table>
 
       <table align="center">
         <tr>
-          <td><input type="submit" class="btn btn-primary mt-4" value="Continue" /></td>
+          <td>
+            <input
+              type="submit"
+              class="btn btn-primary mt-4"
+              value="Continue"
+            />
+          </td>
         </tr>
       </table>
     </form>
@@ -45,6 +40,9 @@ import { getLoggedInUser } from "../utis";
 })
 export class RtgsComponent implements OnInit {
   public rtgsForm: FormGroup;
+  public preserveOrder = originalOrder;
+  public trackByFn = trackByFn;
+  
   public alert = {
     type: "success",
     message: "",
@@ -52,14 +50,21 @@ export class RtgsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.rtgsForm = this.fb.group({
-      fromaccountnumber: [null, Validators.required],
-      accountNumber: [null, Validators.required],
+      fromAccount: [null, Validators.required],
+      toAccount: [null, Validators.required],
       amount: [null, Validators.required],
-      transactiondate: [null, Validators.required],
+      transactionDate: [null, Validators.required],
       remarks: [null, Validators.required],
     });
   }
 
+  getFormKey(field: any) {
+    return field.key;
+  }
+
+  getInputType(field: any) {
+    return /Date/i.test(field.key) ? "date" : "text";
+  }
 
   ngOnInit() {}
 
@@ -69,22 +74,20 @@ export class RtgsComponent implements OnInit {
     // Send the this.registerForm.value to the API
     const user: any = await getLoggedInUser().toPromise();
 
-    console.log('user ', user.id)
-    
-    const body = { ...this.rtgsForm.value, userId: user.id, fundMode: 'Rtgs' };
-    console.log('rtgsForm body ', body)
+    console.log("user ", user.id);
 
-    this.httpClient
-      .post("/v2/addFund", body)
-      .subscribe((resp: any) => {
-        if (resp && resp != null) {
-          this.rtgsForm.reset();
-          this.alert = {
-            type: "success",
-            message: "Fund added successefully",
-          };
-          setTimeout(() => (this.alert.message = ""), 5000);
-        }
-      });
+    const body = { ...this.rtgsForm.value, userId: user.id, fundMode: "Rtgs" };
+    console.log("rtgsForm body ", body);
+
+    this.httpClient.post("/v2/addFund", body).subscribe((resp: any) => {
+      if (resp && resp != null) {
+        this.rtgsForm.reset();
+        this.alert = {
+          type: "success",
+          message: "Fund added successefully",
+        };
+        setTimeout(() => (this.alert.message = ""), 5000);
+      }
+    });
   }
 }
