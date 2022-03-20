@@ -51,6 +51,7 @@ export class AppComponent {
   handleLogout() {
     localStorage.clear();
     this.user = new User();
+    this.userService.removeUser();
     this.router.navigate(["/login"]);
   }
 }

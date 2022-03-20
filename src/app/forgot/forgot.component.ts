@@ -4,13 +4,11 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-forgot',
-  templateUrl: './forgot.component.html',
-  styleUrls: ['./forgot.component.scss']
+  selector: "app-forgot",
+  templateUrl: "./forgot.component.html",
+  styleUrls: ["./forgot.component.scss"],
 })
-
 export class ForgotComponent implements OnInit {
-
   public forgotUserForm: FormGroup;
   public alert = { type: "success", message: "" };
 
@@ -39,22 +37,20 @@ export class ForgotComponent implements OnInit {
       .subscribe((resp: any) => {
         console.log(resp);
         if (resp && resp != null) {
-            this.forgotUserForm.reset();
-            this.alert = {
+          this.forgotUserForm.reset();
+          this.alert = {
             type: "success",
             message: `Your username is : ${resp.username}`,
-            };
+          };
           setTimeout(() => (this.alert.message = ""), 5000);
-        } 
+        }
       });
   }
-public accountNo= "";
-  sendOtp(accountNo : any) {
+
+  generateOtp() {
+    const { accountNo } = this.forgotUserForm.value;
     this.httpClient
-      .get('/v2/user/otp?userId='+accountNo)
-      .subscribe((resp:any) => {
-      });
+      .get("/v2/user/otp?userId=" + accountNo)
+      .subscribe((resp: any) => {});
   }
-
-
 }

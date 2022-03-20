@@ -5,13 +5,17 @@
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <ngb-alert [type]="alert.type" *ngIf="alert.message" class="mt-4">{{alert.message}}</ngb-alert>
         <form class="mx-1 mx-md-4" [formGroup]="forgotUserForm" (submit)="handleSubmit($event)">
-          <h3 style="padding-top: 25px;" class="mb-5 text-uppercase">Forgot UserName</h3>
-          <div class="form-outline mb-4">
+          <h3 class="mb-5 pt-4 text-uppercase">Forgot UserName</h3>
+          <div class="form-outline mb-2">
             <input type="email" id="accountNo" class="form-control form-control-lg"
               placeholder="Account Number" formControlName="accountNo"/>
             <label class="form-label" for="accountNo"></label>
           </div>
+          <div class="mb-2" *ngIf="forgotUserForm.value.accountNo">
+            <a class="link-primary" (click)="generateOtp()">Generate OTP</a>
+          </div>
           <div class="form-outline mb-3">
+           
             <input type="password" id="otp" class="form-control form-control-lg"
               placeholder="OTP" formControlName="otp"/>
             <label class="form-label" for="otp"></label>

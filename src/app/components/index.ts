@@ -5,13 +5,14 @@ import { NeftComponent } from "./neft.transfer";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { PipesModule } from "../common/pipes";
+import { NgbAlertModule } from "@ng-bootstrap/ng-bootstrap";
 
 
 const ComponentsList = [NeftComponent, RtgsComponent, ImpsComponent];
 
 @NgModule({
   imports: [
-    FormsModule, ReactiveFormsModule, CommonModule, PipesModule
+    FormsModule, ReactiveFormsModule, CommonModule, PipesModule, NgbAlertModule
   ],
   exports: ComponentsList,
   declarations: ComponentsList,
