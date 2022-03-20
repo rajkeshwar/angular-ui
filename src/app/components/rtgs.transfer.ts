@@ -42,7 +42,7 @@ export class RtgsComponent implements OnInit {
   public rtgsForm: FormGroup;
   public preserveOrder = originalOrder;
   public trackByFn = trackByFn;
-  
+
   public alert = {
     type: "success",
     message: "",
@@ -72,7 +72,7 @@ export class RtgsComponent implements OnInit {
     event.preventDefault();
 
     // Send the this.registerForm.value to the API
-    const user: any = await getLoggedInUser().toPromise();
+    const user: any = getLoggedInUser();
 
     console.log("user ", user.id);
 

@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
-import { getLoggedInUser } from "./utis";
-import { User } from "./model/User";
+import { ActivatedRoute, Router } from "@angular/router";
+import { BehaviorSubject } from "rxjs";
+import { IUser, User } from "./model/User";
+import { UserService } from "./services/user.service";
 
 @Component({
   selector: "app-root",
@@ -10,16 +10,9 @@ import { User } from "./model/User";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = "banking-ui";
-  public user:Observable<User | null> = new BehaviorSubject<User>({
-    id: 0,
-    accountNo: "",
-    password: "",
-    userName: "",
-    name:"",
-    balance:0,
-  });
 
+  public user?: IUser;
+  
   public routeLinks = [
     { route: "home", title: "Home" },
     { route: "account", title: "Account" },
@@ -41,10 +34,22 @@ export class AppComponent {
     { route: "admindashboard", title: "imps" },
   ];
 
-  constructor(public route: ActivatedRoute) {}
+  constructor(
+    public route: ActivatedRoute,
+    public userService: UserService,
+    public router: Router
+  ) {}
 
   ngOnInit() {
-    this.user = getLoggedInUser();
-    console.log("FEtched user", this.user);
+    this.userService.watchUser().subscribe((resp) => {
+      console.log("user : ", resp);
+      this.user = resp;
+    });
+  }
+
+  handleLogout() {
+    localStorage.clear();
+    this.user = new User();
+    this.router.navigate(["/login"]);
   }
 }

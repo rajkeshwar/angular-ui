@@ -64,7 +64,7 @@ export class ImpsComponent {
     event.preventDefault();
 
     // Send the this.registerForm.value to the API
-    const user: any = await getLoggedInUser().toPromise();
+    const user: any = getLoggedInUser();
 
     console.log("user ", user.id);
 

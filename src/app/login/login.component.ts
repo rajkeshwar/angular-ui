@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { UserService } from "../services/user.service";
 
 @Component({
   selector: "app-login",
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private httpClient: HttpClient,
+    private userService: UserService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -30,16 +32,20 @@ export class LoginComponent implements OnInit {
 
     // Send the value this.loginForm.value to the API
     console.log(this.loginForm.value);
-
+    // Remove this line once you integrate with actual API.
     const { username, password } = this.loginForm.value;
+
     this.httpClient
-      .post("/v2/user/login", this.loginForm.value)
+      // Only for testing with mock-server. Can be removed once v2 is working
+      .get(`/api/users?userName=${username}&password=${password}`)
+      // .post("/v2/user/login", this.loginForm.value)
       .subscribe((resp: any) => {
         if (resp && resp != null) {
-          localStorage.setItem('user', JSON.stringify(resp)); 
-          if(resp.roleName == 'Admin'){
+          // Store here your own user object. In mock-server I receive as array. So storing index=0
+          this.userService.storeUser(resp[0]);
+          if (resp.roleName == "Admin") {
             this.router.navigate(["/admindashboard"]);
-          }else{
+          } else {
             this.router.navigate(["/dashboard"]);
           }
         } else {

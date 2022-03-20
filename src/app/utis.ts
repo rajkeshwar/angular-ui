@@ -19,12 +19,12 @@ export const hasSame = (input: string, reInput: string) => {
   };
 };
 
-export const getLoggedInUser = (): Observable<User | null> => {
+export const getLoggedInUser = () => {
   try {
     const userString: any = localStorage.getItem("user");
-    return of(JSON.parse(userString));
+    return JSON.parse(userString);
   } catch (ex) {
-    return of(null);
+    return null;
   }
 };
 

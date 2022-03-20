@@ -25,6 +25,7 @@ const users = Array(100)
     return {
       id: faker.datatype.uuid(),
       accountNo: faker.phone.phoneNumber('38########'),
+      userName: faker.internet.email(),
       password: faker.internet.password(),
       txnPassword: faker.internet.password(),
       otp: faker.datatype.number({ min: 6, max: 6 }),
