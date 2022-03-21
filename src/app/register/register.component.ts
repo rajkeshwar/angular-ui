@@ -18,9 +18,9 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       accountNo: [null, Validators.required],
       password: new FormControl('', Validators.compose([
-        Validators.minLength(5),
+        Validators.minLength(8),
         Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') //this is for the letters (both uppercase and lowercase) and numbers validation
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
      ])),
       rePassword: [null, Validators.required],
       txnPassword: [null, Validators.required],

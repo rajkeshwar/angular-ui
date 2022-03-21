@@ -24,7 +24,6 @@ export class LoginattemptpasswordComponent implements OnInit {
         Validators.minLength(8),
         Validators.required,
         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
-
      ])),
       repassword: ["", Validators.required],
     });
