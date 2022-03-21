@@ -30,7 +30,7 @@ export class AdmindashboardComponent implements OnInit {
       .post("/v2/user/update",updateUser)
       .subscribe((resp:any) => {
         if (resp && resp != null) {
-          this.customers =resp;
+          this.modalService.dismissAll();
         } 
       });
   }

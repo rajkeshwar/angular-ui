@@ -49,4 +49,11 @@ export class ForgotPasswordComponent implements OnInit {
       });
   }
 
+  generateOtp() {
+    const { username } = this.forgotpassForm.value;
+    this.httpClient
+      .get("/v2/user/otp/forgotpass?username=" + username)
+      .subscribe((resp: any) => {});
+  }
+
 }

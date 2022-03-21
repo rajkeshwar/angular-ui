@@ -30,6 +30,7 @@ export class AppComponent {
     { route: "setpassword", title: "setpassword" },
     { route: "accountstatement", title: "accountstatement" },
     { route: "setnewpassword", title: "setnewpassword" },
+    { route : "loginattemptpassword", title:"loginattemptpassword"},
     { route: "rtgs", title: "rtgs" },
     { route: "imps", title: "imps" },
     { route: "admindashboard", title: "imps" },

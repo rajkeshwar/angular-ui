@@ -60,4 +60,11 @@ export class RegisterComponent implements OnInit {
       txnPassword !== confTxnPassword
     );
   }
+
+  generateOtp() {
+    const { accountNo } = this.registerForm.value;
+    this.httpClient
+      .get("/v2/user/otp?accountNo=" + accountNo)
+      .subscribe((resp: any) => {});
+  }
 }

@@ -7,6 +7,9 @@ import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
   selector: "rtgs-transfer",
   template: `
     <form [formGroup]="rtgsForm" (submit)="handleSubmit($event)">
+    <div class="d-flex justify-content-center mt-2" *ngIf="alert.message">
+        <ngb-alert [type]="alert.type" class="d-block">{{ alert.message }}</ngb-alert>
+      </div>
       <table cellspacing="7" cellpadding="8 " align="center" bgcolor="white">
         <div align="center">
           <h3>Initiate RTGS Payment</h3>
@@ -16,6 +19,7 @@ import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
           <td>{{ field.key | heading }}</td>
           <td>
             <input
+              [attr.disabled]="isDisabled(field)"
               [type]="getInputType(field)"
               [name]="field.key"
               [formControlName]="getFormKey(field)"
@@ -47,11 +51,11 @@ export class RtgsComponent implements OnInit {
     type: "success",
     message: "",
   };
-
+  public user: any = getLoggedInUser();
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.rtgsForm = this.fb.group({
-      fromAccount: [null, Validators.required],
-      toAccount: [null, Validators.required],
+      fromAccountNumber: [this.user.accountNo, Validators.required],
+      accountNumber: [null, Validators.required],
       amount: [null, Validators.required],
       transactionDate: [null, Validators.required],
       remarks: [null, Validators.required],
@@ -95,5 +99,10 @@ export class RtgsComponent implements OnInit {
   get isInvlid() {
     const { accountNumber } = this.rtgsForm.value;
     return this.rtgsForm.invalid || accountNumber !== null;
+  }
+
+
+  isDisabled(field: any) {
+    return ["fromAccountNumber"].includes(field.key) ? true : null;
   }
 }

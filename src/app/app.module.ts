@@ -21,6 +21,7 @@ import { SetnewpasswordComponent } from './setnewpassword/setnewpassword.compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { LoginattemptpasswordComponent } from './loginattemptpassword/loginattemptpassword.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
     AccountstatementComponent,
     SetnewpasswordComponent,
     AdmindashboardComponent,
+    LoginattemptpasswordComponent,
   ],
   imports: [
     BrowserModule,

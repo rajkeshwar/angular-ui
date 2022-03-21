@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
+import { IUser } from "../model/User";
 
 @Component({
   selector: "neft-transfer",
@@ -60,16 +61,16 @@ export class NeftComponent {
   public neftForm: FormGroup;
   public preserveOrder = originalOrder;
   public trackByFn = trackByFn;
-
+  
   public alert = {
     type: "success",
     message: "",
   };
-
+  public user: any = getLoggedInUser();
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.neftForm = this.fb.group({
-      fromAccount: ["53759374", Validators.required],
-      toAccount: [null, Validators.required],
+      fromAccountNumber: [this.user.accountNo, Validators.required],
+      accountNumber: [null, Validators.required],
       amount: [null, Validators.required],
       transactionDate: [null, Validators.required],
       remarks: [null, Validators.required],
@@ -110,7 +111,7 @@ export class NeftComponent {
   }
 
   isDisabled(field: any) {
-    return ["fromAccount"].includes(field.key) ? true : null;
+    return ["fromAccountNumber"].includes(field.key) ? true : null;
   }
 
   get isInvlid() {

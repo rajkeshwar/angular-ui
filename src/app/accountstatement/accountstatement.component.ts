@@ -39,7 +39,7 @@ export class AccountstatementComponent implements OnInit {
     const body = { ...this.accForm.value, userId: userId};
 
     this.httpClient
-      .post("/v2/accounthistory", this.accForm.value)
+      .post("/v2/accounthistory",body)
       .subscribe(resp => this.statements = resp);
   }
 

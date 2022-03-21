@@ -50,7 +50,7 @@ export class ForgotComponent implements OnInit {
   generateOtp() {
     const { accountNo } = this.forgotUserForm.value;
     this.httpClient
-      .get("/v2/user/otp?userId=" + accountNo)
+      .get("/v2/user/otp?accountNo=" + accountNo)
       .subscribe((resp: any) => {});
   }
 }

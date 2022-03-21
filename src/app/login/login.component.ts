@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private httpClient: HttpClient,
-    private userService: UserService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
     this.loginForm = this.fb.group({
       username: ["", Validators.required],
@@ -31,22 +31,22 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
 
     // Send the value this.loginForm.value to the API
-    console.log(this.loginForm.value);
-    // Remove this line once you integrate with actual API.
-    const { username, password } = this.loginForm.value;
+    
 
+    const { username, password } = this.loginForm.value;
     this.httpClient
-      // Only for testing with mock-server. Can be removed once v2 is working
-      .get(`/api/users?userName=${username}&password=${password}`)
-      // .post("/v2/user/login", this.loginForm.value)
+      .post("/v2/user/login", this.loginForm.value)
       .subscribe((resp: any) => {
         if (resp && resp != null) {
-          // Store here your own user object. In mock-server I receive as array. So storing index=0
-          this.userService.storeUser(resp[0]);
-          if (resp.roleName == "Admin") {
-            this.router.navigate(["/admindashboard"]);
-          } else {
-            this.router.navigate(["/dashboard"]);
+          if(resp.attempts === 3){
+            this.router.navigate(["/loginattemptpassword"]);
+          }else{
+            this.userService.storeUser(resp);
+            if(resp.roleName == 'Admin'){
+              this.router.navigate(["/admindashboard"]);
+            }else{
+              this.router.navigate(["/dashboard"]);
+            }
           }
         } else {
           this.alert = {

@@ -4,7 +4,8 @@ export interface IUser {
   password?: string;
   userName: string;
   name: string;
-  balance: number;
+  accountBalance: number;
+  userid:number;
 }
 
 export class User implements IUser {
@@ -13,7 +14,8 @@ export class User implements IUser {
   public password?: string;
   public userName: string;
   public name: string;
-  public balance: number;
+  public accountBalance: number;
+  public userid: number;
 
   constructor() {
     this.id = 0;
@@ -21,6 +23,7 @@ export class User implements IUser {
     this.password = "";
     this.userName = "";
     this.name = "";
-    this.balance = 0;
+    this.accountBalance = 0;
+    this.userid =0;
   }
 }

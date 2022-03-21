@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from "./forgot-password/forgot-password.compo
 import { ForgotComponent } from "./forgot/forgot.component";
 import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
+import { LoginattemptpasswordComponent } from "./loginattemptpassword/loginattemptpassword.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { RegisterComponent } from "./register/register.component";
 import { SetnewpasswordComponent } from "./setnewpassword/setnewpassword.component";
@@ -23,10 +24,11 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "forgot", component: ForgotComponent },
   { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
+  { path:"loginattemptpassword", component : LoginattemptpasswordComponent},
   {
     path: "dashboard",
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       { path: "", redirectTo: "account", pathMatch: "full" },
       { path: "account", component: AccountComponent },
@@ -40,22 +42,22 @@ const routes: Routes = [
   {
     path: "customercreate",
     component: CustomercreateComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
   {
     path: "forgot-password",
     component: ForgotPasswordComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
   {
     path: "setnewpassword",
     component: SetnewpasswordComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
   {
     path: "admindashboard",
     component: AdmindashboardComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
 ];
 

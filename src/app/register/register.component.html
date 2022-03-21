@@ -41,6 +41,9 @@
               placeholder="Confirm Transaction Password" formControlName="rePassword"/>
             <label class="form-label" for="rePassword"></label>
           </div>
+          <div class="mb-2" *ngIf="registerForm.value.accountNo">
+            <a class="link-primary" (click)="generateOtp()">Generate OTP</a>
+          </div>
           <div class="form-outline mb-4">
             <input type="email" id="otp" class="form-control form-control-lg"
               placeholder="OTP" formControlName="otp"/>
