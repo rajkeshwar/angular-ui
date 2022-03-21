@@ -51,7 +51,7 @@ export class ImpsComponent {
       fromAccountNumber: [this.user.accountNo, Validators.required],
       accountNumber: [null, Validators.required],
       amount: [null, Validators.required],
-      transactiondate: [null, Validators.required],
+      transactionDate: [null, Validators.required],
       remarks: [null, Validators.required],
     });
   }

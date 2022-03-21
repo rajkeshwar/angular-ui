@@ -10,6 +10,7 @@ import { getLoggedInUser } from "../utis";
 })
 export class AccountComponent implements OnInit {
   public statements: any = [];
+  public users: any = [];
   public user?: IUser;
   constructor(private httpClient: HttpClient) {}
 
@@ -18,6 +19,12 @@ export class AccountComponent implements OnInit {
     this.user = getLoggedInUser();
     this.httpClient
       .get(`/v2/accounthistory?userId=${this.user?.userid}`)
-      .subscribe((resp) => (this.statements = resp));
+      .subscribe((resp: any) => {
+        if (resp) {
+          console.log(resp)
+          this.statements = resp.accountList;
+          this.users = resp.userList;
+        }
+      });
   }
 }
