@@ -51,7 +51,7 @@ import { IUser } from "../model/User";
 
       <table align="center">
         <tr>
-          <button type="submit" class="btn btn-primary btn-lg">Continue</button>
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="neftForm.invalid">Continue</button>
         </tr>
       </table>
     </form>
@@ -115,7 +115,7 @@ export class NeftComponent {
   }
 
   get isInvlid() {
-    const { accountNumber } = this.neftForm.value;
-    return this.neftForm.invalid || accountNumber !== null;
+    const { accountNumber,fromAccountNumber } = this.neftForm.value;
+    return this.neftForm.invalid || accountNumber === fromAccountNumber;
   }
 }

@@ -30,7 +30,7 @@ import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
 
       <table align="center">
         <tr>
-          <button type="submit" class="btn btn-primary btn-lg">Continue</button>
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="impsForm.invalid">Continue</button>
         </tr>
       </table>
     </form>
@@ -84,8 +84,8 @@ export class ImpsComponent {
     });
   }
   get isInvlid() {
-    const { accountNumber } = this.impsForm.value;
-    return this.impsForm.invalid || accountNumber !== null;
+    const { accountNumber,fromAccountNumber } = this.impsForm.value;
+    return this.impsForm.invalid || accountNumber === fromAccountNumber;
   }
 
 

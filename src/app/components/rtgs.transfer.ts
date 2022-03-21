@@ -32,7 +32,7 @@ import { getLoggedInUser, originalOrder, trackByFn } from "../utis";
         <tr>
           <td>
             <input
-              type="submit"
+              type="submit" [disabled]="rtgsForm.invalid"
               class="btn btn-primary mt-4"
               value="Continue"
             />
@@ -97,8 +97,8 @@ export class RtgsComponent implements OnInit {
   }
 
   get isInvlid() {
-    const { accountNumber } = this.rtgsForm.value;
-    return this.rtgsForm.invalid || accountNumber !== null;
+    const { accountNumber,fromAccountNumber } = this.rtgsForm.value;
+    return this.rtgsForm.invalid || accountNumber === fromAccountNumber;
   }
 
 
