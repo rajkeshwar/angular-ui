@@ -32,6 +32,7 @@ export class CustomercreateComponent implements OnInit {
       netbanking: ["", Validators.required],
       termsAndConditions: ["", Validators.required],
       accountType : ["", Validators.required],
+      adharDoc : ["", Validators.required],
     });
   }
 

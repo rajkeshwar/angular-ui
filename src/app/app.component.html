@@ -1,14 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Banking</a>
+    <img src="assets/images/bankname.jpg" class="img-fluid" alt="Sample image" *ngIf="user">
+    <a class="navbar-brand" href="#" *ngIf="!user">Banking</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" routerLink="/register">Register</a>
-        <a class="nav-link" routerLink="/customercreate">Create Customer</a>
+        <a class="nav-link" routerLink="/register" *ngIf="!user">Register</a>
+        <a class="nav-link" routerLink="/customercreate" *ngIf="!user">Create Customer</a>
       </div>
     </div>
   </div>
