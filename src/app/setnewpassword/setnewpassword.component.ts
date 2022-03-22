@@ -42,13 +42,13 @@ export class SetnewpasswordComponent implements OnInit {
       .post("/v2/user/setNewPassword", this.setnewpassForm.value)
       .subscribe((resp: any) => {
         console.log(resp);
-        if (resp && resp != null) {
+        if (resp && resp.data) {
               this.router.navigate(["/login"]);
               setTimeout(() => (this.alert.message = ""), 5000);
         } else {
           this.alert = {
             type: "danger",
-            message: "Invalid Username ",
+            message: `${resp.error}`,
           };
         }
       });

@@ -40,13 +40,18 @@ export class RegisterComponent implements OnInit {
     this.httpClient
       .post("/v2/user/register", this.registerForm.value)
       .subscribe((resp: any) => {
-        if (resp && resp != null) {
+        if (resp && resp.data) {
           this.registerForm.reset();
           this.alert = {
             type: "success",
             message: "Register success. Please login",
           };
           setTimeout(() => (this.alert.message = ""), 5000);
+        }else{
+          this.alert = {
+            type: "danger",
+            message: `${resp.error}`,
+          };
         }
       });
   }
@@ -65,6 +70,14 @@ export class RegisterComponent implements OnInit {
     const { accountNo } = this.registerForm.value;
     this.httpClient
       .get("/v2/user/otp?accountNo=" + accountNo)
-      .subscribe((resp: any) => {});
+      .subscribe((resp: any) => {
+        if (resp && resp.error) {
+          this.alert = {
+            type: "danger",
+            message: `${resp.error}`,
+          };
+          setTimeout(() => (this.alert.message = ""), 5000);
+        }
+      });
   }
 }

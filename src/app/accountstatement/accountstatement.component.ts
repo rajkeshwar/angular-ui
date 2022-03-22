@@ -31,7 +31,6 @@ export class AccountstatementComponent implements OnInit {
 
     // Send the this.registerForm.value to the API
     var data = localStorage.getItem("user");
-    console.log(data);
     var userId="";
     if(data != null){
       userId = JSON.parse(data).userid;

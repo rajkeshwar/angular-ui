@@ -2,11 +2,17 @@
   <div class="container-fluid h-custom">
     <div class="card card-registration my-4 border-0">
       <div class="row d-flex justify-content-center align-items-center h-100">
-
+   
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 mb-4">
           <ngb-alert [type]="alert.type" *ngIf="alert.message" class="mb-4">{{alert.message}}</ngb-alert>
           <form class="mx-1 mx-md-4 mb-4" [formGroup]="form" (submit)="handleSubmit($event)">
-            <h4 style="padding-top: 25px;" class="mb-5 text-uppercase"> Open A Saving Account</h4>
+            <h4 style="padding-top: 25px;" class="mb-5"> Let’s Get Started</h4>
+
+            <div class="form-outline">
+              <input placeholder="Branch Name" type="text" id="branchName"
+                class="form-control form-control-lg" formControlName="branchName"/>
+              <label class="form-label" for="branchName"></label>
+            </div>
 
             <div class="row">
               <div class="col-md-6">
@@ -24,7 +30,7 @@
             </div>
 
             <div class="form-outline">
-              <input placeholder="Father's name" type="text" id="fathersName"
+              <input placeholder="Father's Name" type="text" id="fathersName"
                 class="form-control form-control-lg" formControlName="fathersName"/>
               <label class="form-label" for="fathersName"></label>
             </div>

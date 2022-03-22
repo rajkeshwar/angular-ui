@@ -28,16 +28,17 @@ export class AddpayeeComponent implements OnInit {
 
   async handleSubmit(event: Event) {
     event.preventDefault();
-    const user: any = await getLoggedInUser().toPromise();
+    var data = localStorage.getItem("user");
+    var userId="";
+    if(data != null){
+      userId = JSON.parse(data).userid;
+    }
 
-    console.log("userId ", user.userid);
-    console.log("addPayeeForm ", this.addPayeeForm.value);
-
-    const body = { ...this.addPayeeForm.value, userId: user.userid };
+    const body = { ...this.addPayeeForm.value, userId: userId };
     
 
     this.httpClient.post("/v2/addPayee", body).subscribe((resp: any) => {
-      if (resp && resp != null) {
+      if (resp && resp.data) {
         this.addPayeeForm.reset();
         this.alert = {
           type: "success",
@@ -47,7 +48,7 @@ export class AddpayeeComponent implements OnInit {
       } else {
         this.alert = {
           type: "danger",
-          message: "Account Number already exists",
+          message: `${resp.error}`,
         };
       }
     });

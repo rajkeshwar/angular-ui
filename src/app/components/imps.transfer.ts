@@ -73,13 +73,18 @@ export class ImpsComponent {
     const body = { ...this.impsForm.value, userId: user.userid, fundMode: "Imps", fromaccountnumber:user.accountNo };
 
     this.httpClient.post("/v2/addFund", body).subscribe((resp: any) => {
-      if (resp && resp != null) {
+      if (resp && resp.data) {
         this.impsForm.reset();
         this.alert = {
           type: "success",
           message: "Fund added successefully",
         };
         setTimeout(() => (this.alert.message = ""), 5000);
+      }else {
+        this.alert = {
+          type: "danger",
+          message: `${resp.error}`,
+        };
       }
     });
   }

@@ -36,13 +36,18 @@ export class ForgotComponent implements OnInit {
       .post("/v2/user/forgotUserId", this.forgotUserForm.value)
       .subscribe((resp: any) => {
         console.log(resp);
-        if (resp && resp != null) {
+        if (resp && resp.data) {
           this.forgotUserForm.reset();
           this.alert = {
             type: "success",
-            message: `Your username is : ${resp.username}`,
+            message: `Your username is : ${resp.data.username}`,
           };
           setTimeout(() => (this.alert.message = ""), 5000);
+        }else {
+          this.alert = {
+            type: "danger",
+            message: `${resp.error}`,
+          };
         }
       });
   }
@@ -51,6 +56,14 @@ export class ForgotComponent implements OnInit {
     const { accountNo } = this.forgotUserForm.value;
     this.httpClient
       .get("/v2/user/otp?accountNo=" + accountNo)
-      .subscribe((resp: any) => {});
+      .subscribe((resp: any) => {
+        if (resp && resp.error) {
+          this.alert = {
+            type: "danger",
+            message: `${resp.error}`,
+          };
+          setTimeout(() => (this.alert.message = ""), 5000);
+        }
+      });
   }
 }

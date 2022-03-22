@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 export class CustomercreateComponent implements OnInit {
   public form: FormGroup;
   public alert = { type: "error", message: "" };
-
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
     this.form = this.fb.group({
       firstName: ["", Validators.required],
@@ -33,6 +32,7 @@ export class CustomercreateComponent implements OnInit {
       termsAndConditions: ["", Validators.required],
       accountType : ["", Validators.required],
       adharDoc : ["", Validators.required],
+      branchName : ["", Validators.required],
     });
   }
 
@@ -47,11 +47,16 @@ export class CustomercreateComponent implements OnInit {
     this.httpClient
       .post("/v2/user/create", this.form.value)
       .subscribe((resp: any) => {
-        if (resp && resp.userid) {
+        if (resp && resp.data) {
           this.form.reset();
           this.alert = {
             type: "success",
-            message: `Customer created successfully with referenceno : ${resp.referenceno}`,
+            message: `Customer created successfully with referenceno : ${resp.data.referenceno}`,
+          };
+        }else{
+          this.alert = {
+            type: "danger",
+            message: `${resp.error}`,
           };
         }
       });

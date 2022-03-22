@@ -13,6 +13,7 @@ import { getLoggedInUser } from "./utis";
 export class AppComponent {
 
   public user?: IUser = getLoggedInUser();
+  today: number = Date.now();
   
   public routeLinks = [
     { route: "home", title: "Home" },
@@ -34,6 +35,7 @@ export class AppComponent {
     { route: "rtgs", title: "rtgs" },
     { route: "imps", title: "imps" },
     { route: "admindashboard", title: "imps" },
+    { route: "trackapplication", title: "trackapplication"},
   ];
 
   constructor(

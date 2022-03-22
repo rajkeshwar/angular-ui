@@ -1,0 +1,26 @@
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <ngb-alert [type]="alert.type" *ngIf="alert.message" class="mt-4">{{alert.message}}</ngb-alert>
+          <form class="mx-1 mx-md-4" [formGroup]="trackForm" (submit)="handleSubmit($event)">
+            <h3 class="mb-5 pt-4 text-uppercase">Track Application</h3>
+            <div class="form-outline mb-2">
+              <input type="email" id="referenceNo" class="form-control form-control-lg"
+                placeholder="Reference Number" formControlName="referenceNo"/>
+              <label class="form-label" for="referenceNo"></label>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <button type="submit" class="btn btn-primary btn-lg">Procced</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>

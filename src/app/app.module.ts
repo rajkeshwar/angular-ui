@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { LoginattemptpasswordComponent } from './loginattemptpassword/loginattemptpassword.component';
+import { TrackapplicationComponent } from './trackapplication/trackapplication.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LoginattemptpasswordComponent } from './loginattemptpassword/loginattem
     SetnewpasswordComponent,
     AdmindashboardComponent,
     LoginattemptpasswordComponent,
+    TrackapplicationComponent,
   ],
   imports: [
     BrowserModule,

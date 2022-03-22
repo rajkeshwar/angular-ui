@@ -16,6 +16,7 @@ import { PaymentComponent } from "./payment/payment.component";
 import { RegisterComponent } from "./register/register.component";
 import { SetnewpasswordComponent } from "./setnewpassword/setnewpassword.component";
 import { SetpasswordComponent } from "./setpassword/setpassword.component";
+import { TrackapplicationComponent } from "./trackapplication/trackapplication.component";
 import { UsersettingComponent } from "./usersetting/usersetting.component";
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: "forgot", component: ForgotComponent },
   { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
   { path:"loginattemptpassword", component : LoginattemptpasswordComponent},
+  { path:"trackapplication", component: TrackapplicationComponent},
   {
     path: "dashboard",
     component: DashboardComponent,

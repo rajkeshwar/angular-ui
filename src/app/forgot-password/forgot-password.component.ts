@@ -37,13 +37,13 @@ export class ForgotPasswordComponent implements OnInit {
       .post("/v2/user/forgotPassword", this.forgotpassForm.value)
       .subscribe((resp: any) => {
         console.log(resp);
-        if (resp && resp != null) {
+        if (resp && resp.data) {
               this.router.navigate(["/setnewpassword"]);
               setTimeout(() => (this.alert.message = ""), 5000);
         } else {
           this.alert = {
             type: "danger",
-            message: "Invalid Username ",
+            message: `${resp.error}`,
           };
         }
       });
@@ -53,7 +53,15 @@ export class ForgotPasswordComponent implements OnInit {
     const { username } = this.forgotpassForm.value;
     this.httpClient
       .get("/v2/user/otp/forgotpass?username=" + username)
-      .subscribe((resp: any) => {});
+      .subscribe((resp: any) => {
+        if (resp && resp.error) {
+          this.alert = {
+            type: "danger",
+            message: `${resp.error}`,
+          };
+          setTimeout(() => (this.alert.message = ""), 5000);
+        }
+      });
   }
 
 }
